@@ -20,7 +20,7 @@ python notebook_v4_to_py.py -f notebook_filename.ipynb
 
 + While this script works, it is much more convenient to make Jupyter create
 the python file itself automatically. This can be done by adding the content
-of *ipython_notebook_config.txt* to the ipython_notebook_config.py in the config
+of *ipython_notebook_config.txt* to the jupyter_notebook_config.py in the config
 file which can be located with
 
 ipython locate profile default

@@ -35,3 +35,9 @@ Call the scripts with argument "--overwrite" to overwrite existing .ipynb or
 
 Call the scripts with argument "--dry-run" to simulate (print out) what would
 happen.
+
+
+#### An alternative conversion method
+
+If one needs only a clean notebook in its original JSON format without the output and cell
+meatadata information, then [this solution](https://github.com/jesse-c/ipython3-versioncontrol) might be helpful.

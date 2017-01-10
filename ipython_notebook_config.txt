@@ -42,12 +42,14 @@
 #
 #In jupyter_notebook_config.py, we insert the following Python code:
 
+from __future__ import print_function
 import sys
 import json
 import os
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+if (sys.version_info < (3,0)):
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 
 def get_notebook_data(path_to_file):
     with open(path_to_file, 'r') as notebook:
@@ -69,7 +71,7 @@ def write_notebook_data_to_py(notebook_data, out_file_path):
         try:
             cells = notebook_data['cells']
         except KeyError:
-            print "Nbformat is " + str(notebook_data['nbformat']) + ", try the old converter script."
+            print ("Nbformat is " + str(notebook_data['nbformat']) + ", try the old converter script.")
             return
 
         for cell in cells:
@@ -95,7 +97,7 @@ def post_save(model, os_path, contents_manager):
     output_file_path = construct_output_py_file_path(os_path, skip_if_exists=False)
     notebook_data = get_notebook_data(os_path)
     write_notebook_data_to_py(notebook_data, output_file_path)
-    print output_file_path, "was successfully saved"
+    print (output_file_path, "was successfully saved")
 
 c = get_config()
 c.FileContentsManager.post_save_hook = post_save

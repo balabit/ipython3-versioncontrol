@@ -1,33 +1,43 @@
-### Short description of the Jupyter notebook to/from Python converter files.
+##Short description of the Ipython 3 to/from Python converter files.
 
-It can be difficult to version control Jupyter notebooks, especially if you don't want to track changes in the output, just the code.  While Jupyter can generate python files from a notebook, there is no cell type metadata and information about markdown cells is completely lost.
-
-#### To automatically save your Jupyter notebook as a Python file with metadata, add the text in **jupyter_notebook_config.txt** to your jupyter_notebook_config.py file.
-
-* On Windows, this file can generally be found in the C:\Users\YOUR_USER_NAME\\.jupyter directory.  If there is no config file in this directory, create one with ```jupyter notebook --generate-config``` at the command line.
-	* (If you can't find your .jupyter folder, try ```ipython locate profile default```.  This should find your .ipython folder which is likely in the same directory as your .jupyter folder.)
-* Once this is done, a .py file with the same name as your notebook will be saved in the same directory every time your notebook is saved.  
-* You can verify this is working in the terminal window running your
-notebook, which will print a note everytime the .py file is saved. 
-* Files named "Untitled" will not be saved.
+The *ipython notebook --script* run option that produced python codes
+from an Ipython 2 notebook is deprecated in Ipython 3 (Jupyter, nbformat 4).
+The python file that Jupyter can produce has several shortcomings, the most
+problematic one is the missing metainformation: there is no cell type
+metadata, just a bracket indicates where a new code cell starts, but information
+about markdowncells are completly lost. This is why restoring the
+notebook (without the output content) without losing important
+information is not possible right now.
 
 
-#### If you do not want to run this automatically, but would like to run on individual notebooks, use the following scripts:
+The scripts in the folder suggest a solution to this problem.
 
-* **notebook_v4_to_py.py** converts a Jupyter notebook to a .py file that preserves
++ *notebook_v4_to_py.py* converts an Ipython notebook to py file that preserves
 cell metadata. The conversion can be done manually by running the following
-command:
+command
 
-	```python notebook_v4_to_py.py -f notebook_filename.ipynb```
-    
+python notebook_v4_to_py.py -f notebook_filename.ipynb
 
-* **py_to_notebook_v4.py** converts a .py file back to a Jupyter notebook, using the following command:
++ While this script works, it is much more convenient to make Jupyter create
+the python file itself automatically. This can be done by adding the content
+of *ipython_notebook_config.txt* to the jupyter_notebook_config.py in the config
+file which can be located with
 
-	```python py_to_notebook_v4.py -f py_filename.py```
-    
+ipython locate profile default
 
-* Call the scripts with argument "--overwrite" to overwrite existing .ipynb or
++ The python files then can be version controlled, and the converter script that
+creates a notebook feom the .py file is *py_to_notebook_v4.py*:
+
+python py_to_notebook_v4.py -f py_filename.py
+
+Call the scripts with argument "--overwrite" to overwrite existing .ipynb or
 .py files.
 
-* Call the scripts with argument "--dry-run" to simulate (print out) what would
+Call the scripts with argument "--dry-run" to simulate (print out) what would
 happen.
+
+
+#### An alternative conversion method
+
+If one needs only a clean notebook in its original JSON format without the output and cell
+meatadata information, then [this solution](https://github.com/jesse-c/ipython3-versioncontrol) might be helpful.

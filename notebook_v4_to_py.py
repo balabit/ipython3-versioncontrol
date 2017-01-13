@@ -51,7 +51,7 @@ import json
 import os
 import fnmatch
 
-if (sys.version_info < (3,0)):
+if (sys.version_info[0] < 3):
     reload(sys)
     sys.setdefaultencoding('utf8')
 

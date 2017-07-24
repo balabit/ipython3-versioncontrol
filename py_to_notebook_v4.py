@@ -149,7 +149,7 @@ def create_initial_output(lines):
 
 def write_py_data_to_notebook(output, out_file_path):
     with open(out_file_path, 'w') as outfile:
-        json.dump(output, outfile)
+        json.dump(output, outfile, indent=2)
 
 def convert_py_to_notebook(input_file_path, skip_if_exists=True, dry_run=False):
     output_file_path = construct_output_ipynb_file_path(input_file_path, skip_if_exists)
